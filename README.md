@@ -49,7 +49,7 @@ This repository contains a data science framework for identifying and addressing
 - ✅ Geospatial risk maps (folium, kepler.gl)
 - ✅ Statistical models of key malnutrition drivers
 - ✅ Prediction tool for identifying high-risk households
-- ✅ Policy dashboard (optional)
+- ✅ Policy dashboard 
 - ✅ 1–2 page policy brief with actionable insights
 
 ---
