@@ -1,140 +1,106 @@
 import streamlit as st
-import folium
-import geopandas as gpd
 import pandas as pd
-from folium.features import GeoJsonTooltip
-from streamlit_folium import st_folium
+import plotly.express as px
+import json
+import os
 
-# --- Load Data ---
-# Load GeoJSON for provinces (use the correct path to your file)
-province_geojson_path = r"D:\NISR\HiddenHungerRwanda\rwanda_province.json"
-gdf_province = gpd.read_file(province_geojson_path)
-
-# Load the malnutrition rates data for both province and district levels
-malnutrition_province_data_path = "D:/NISR/HiddenHungerRwanda/province_malnutrition_rates.csv"
-malnutrition_province_rates = pd.read_csv(malnutrition_province_data_path)
-
-# Rename the 'Province' column to 'name' in malnutrition_province_rates
-malnutrition_province_rates = malnutrition_province_rates.rename(columns={'Province': 'name'})
-
-# Merge GeoDataFrame with malnutrition data for provinces
-merged_province = gdf_province.merge(malnutrition_province_rates, on='name', how='left')
-
-# Check the result
-print(merged_province.head())
-
-# --- Streamlit App Layout ---
+# --- Page Setup ---
+st.set_page_config(page_title="🇷🇼 Rwanda Malnutrition Dashboard", layout="wide")
 st.title("Rwanda Malnutrition Dashboard")
 st.markdown("""
-    This dashboard visualizes malnutrition rates in Rwanda at both the province and district levels. 
-    You can interact with the map to explore stunting, wasting, and underweight rates in different provinces and districts.
+    A data-driven look at malnutrition indicators and risk factors in Rwanda.
+    interact with the map to explore stunting, wasting, and underweight rates in different provinces and districts.
 """)
 
-# --- Add Filter Options ---
-st.sidebar.header("Filter Options")
-level = st.sidebar.radio("Choose map level", options=["Province", "District"])
+# --- File Paths ---
+DISTRICT_DATA_PATH = "district_malnutrition_rates.csv"
+PROVINCE_DATA_PATH = "province_malnutrition_rates.csv"
+DISTRICT_GEOJSON_PATH = "rwanda_districts.geojson"
+PROVINCE_GEOJSON_PATH = "rwanda_province.json"
 
-selected_indicator = st.sidebar.selectbox(
-    "Choose malnutrition indicator",
-    options=['Stunting Rate (%)', 'Wasting Rate (%)', 'Underweight Rate (%)']
-)
+# --- Error Checks ---
+missing_files = []
+for path in [DISTRICT_DATA_PATH, PROVINCE_DATA_PATH, DISTRICT_GEOJSON_PATH, PROVINCE_GEOJSON_PATH]:
+    if not os.path.exists(path):
+        missing_files.append(path)
 
-# --- Create Folium Map ---
-m = folium.Map(location=[-1.95, 29.9], zoom_start=8, tiles='CartoDB positron')
+if missing_files:
+    st.error(f"❌ Missing required files:\n{', '.join(missing_files)}")
+    st.stop()
 
-# --- Province-level Choropleth ---
-if level == "Province":
-    # Add Choropleth Layer for Province level
-    choropleth = folium.Choropleth(
-        geo_data=merged_province,
-        data=merged_province,
-        columns=['name', selected_indicator],  # Changed 'Province' to 'name'
-        key_on='feature.properties.name',  # This should match your GeoJSON property for the province name
-        fill_color='YlOrRd',
-        fill_opacity=0.7,
-        line_opacity=0.3,
-        nan_fill_color='lightgrey',
-        legend_name=selected_indicator,
-        highlight=True
-    ).add_to(m)
+# --- Load Data ---
+@st.cache_data
+def load_csv(path):
+    return pd.read_csv(path)
 
-    # Add Tooltip for Province-level Info
-    tooltip = GeoJsonTooltip(
-        fields=['name', 'Stunting Rate (%)', 'Wasting Rate (%)', 'Underweight Rate (%)'],  # Changed 'NAME_1' to 'name'
-        aliases=['Province:', 'Stunting Rate (%):', 'Wasting Rate (%):', 'Underweight Rate (%):'],
-        localize=True,
-        sticky=True,
-        labels=True,
-        style="""background-color: #F0EFEF; border: 1px solid black; border-radius: 3px; box-shadow: 3px;""",
+@st.cache_data
+def load_geojson(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+df_district = load_csv(DISTRICT_DATA_PATH)
+df_province = load_csv(PROVINCE_DATA_PATH)
+geo_district = load_geojson(DISTRICT_GEOJSON_PATH)
+geo_province = load_geojson(PROVINCE_GEOJSON_PATH)
+
+# --- Sidebar: Region and Malnutrition Type Selection ---
+with st.sidebar.expander("🌍 Region Selection", expanded=True):
+    region_level = st.selectbox("🗺️ Select Level", ["District", "Province"])
+    mal_type = st.radio(
+        "📊 Select Malnutrition Type",
+        ["Stunting Rate (%)", "Underweight Rate (%)", "Wasting Rate (%)"]
     )
-    choropleth.geojson.add_child(tooltip)
 
-# --- District-level Choropleth ---
-else:
-    # Load the district-level GeoJSON
-    district_geojson_path = "D:/NISR/HiddenHungerRwanda/rwanda_districts.geojson"
-    gdf_district = gpd.read_file(district_geojson_path)
+# --- Map Visualization ---
+if region_level == "District":
+    st.subheader(f"{mal_type} by District")
 
-    # Load the malnutrition district-level data
-    district_malnutrition_data_path = "D:/NISR/HiddenHungerRwanda/district_malnutrition_rates.csv"
-    district_malnutrition_rates = pd.read_csv(district_malnutrition_data_path)
+    # Ensure malnutrition data is numeric and fill missing with 0
+    df_district[mal_type] = pd.to_numeric(df_district[mal_type], errors='coerce').fillna(0)
 
-    # Merge GeoDataFrame with district malnutrition data
-    merged_district = gdf_district.merge(district_malnutrition_rates, on='District', how='left')
+    # Map visualization for District
+    featureid_key = "properties.District"  # Adjust based on your GeoJSON
 
-    # Convert CRS to match Folium map
-    merged_district = merged_district.to_crs(epsg=4326)
-
-    # Add Choropleth Layer for District level
-    choropleth = folium.Choropleth(
-        geo_data=merged_district,
-        data=merged_district,
-        columns=['District', selected_indicator],
-        key_on='feature.properties.District',
-        fill_color='YlOrRd',
-        fill_opacity=0.7,
-        line_opacity=0.3,
-        nan_fill_color='lightgrey',
-        legend_name=selected_indicator,
-        highlight=True
-    ).add_to(m)
-
-    # Add Tooltip for District-level Info
-    tooltip = GeoJsonTooltip(
-        fields=['District', 'Stunting Rate (%)', 'Wasting Rate (%)', 'Underweight Rate (%)'],
-        aliases=['District:', 'Stunting Rate (%):', 'Wasting Rate (%):', 'Underweight Rate (%):'],
-        localize=True,
-        sticky=True,
-        labels=True,
-        style="""background-color: #F0EFEF; border: 1px solid black; border-radius: 3px; box-shadow: 3px;""",
+    fig = px.choropleth(
+        df_district,
+        geojson=geo_district,
+        locations="District",
+        color=mal_type,
+        featureidkey=featureid_key,
+        color_continuous_scale="Reds",
+        title=f"{mal_type} by District",
+        labels={mal_type: mal_type}
     )
-    choropleth.geojson.add_child(tooltip)
 
-# --- Display Map ---
-st_folium(m, width=700, height=500)
+elif region_level == "Province":
+    st.subheader(f"{mal_type} by Province")
 
-# --- Data Table ---
+    # Ensure malnutrition data is numeric and fill missing with 0
+    df_province[mal_type] = pd.to_numeric(df_province[mal_type], errors='coerce').fillna(0)
+
+    # Check that the province names match between the CSV and GeoJSON
+    featureid_key = "properties.name"  # Adjust this based on your GeoJSON field for province name
+
+    # Map visualization for Province
+    fig = px.choropleth(
+        df_province,
+        geojson=geo_province,
+        locations="Province",
+        color=mal_type,
+        featureidkey=featureid_key,
+        color_continuous_scale="Blues",
+        title=f"{mal_type} by Province",
+        labels={mal_type: mal_type}
+    )
+
+# Update geo settings and display map
+fig.update_geos(fitbounds="locations", visible=False)
+st.plotly_chart(fig, use_container_width=True)
+
+# --- Additional Data Table ---
 st.sidebar.subheader("Malnutrition Data")
-if level == "Province":
-    st.sidebar.dataframe(malnutrition_province_rates)
+if region_level == "District":
+    st.sidebar.dataframe(df_district)
 else:
-    st.sidebar.dataframe(district_malnutrition_rates)
+    st.sidebar.dataframe(df_province)
 
-# --- Additional Analysis ---
-st.header("Analysis and Insights")
-st.markdown("""
-    You can also analyze the overall rates of stunting, wasting, and underweight across the provinces and districts.
-    Use the filters in the sidebar to toggle between different malnutrition indicators and levels.
-""")
-
-# Optional: Summary statistics or other insights (you can enhance as per your need)
-if level == "Province":
-    st.write("Total Provinces:", len(malnutrition_province_rates))
-    st.write(f"Average Stunting Rate: {malnutrition_province_rates['Stunting Rate (%)'].mean():.2f}%")
-    st.write(f"Average Wasting Rate: {malnutrition_province_rates['Wasting Rate (%)'].mean():.2f}%")
-    st.write(f"Average Underweight Rate: {malnutrition_province_rates['Underweight Rate (%)'].mean():.2f}%")
-else:
-    st.write("Total Districts:", len(district_malnutrition_rates))
-    st.write(f"Average Stunting Rate: {district_malnutrition_rates['Stunting Rate (%)'].mean():.2f}%")
-    st.write(f"Average Wasting Rate: {district_malnutrition_rates['Wasting Rate (%)'].mean():.2f}%")
-    st.write(f"Average Underweight Rate: {district_malnutrition_rates['Underweight Rate (%)'].mean():.2f}%")
