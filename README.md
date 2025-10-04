@@ -1,68 +1,136 @@
-# 🧭 Hidden Hunger in Rwanda — Data-Driven Analysis (CFSVA 2024)
+Ending Hidden Hunger in Rwanda
 
-This repository contains a data science framework for identifying and addressing hidden hunger and micronutrient deficiencies in Rwanda using the **2024 Comprehensive Food Security and Vulnerability Assessment (CFSVA)** microdata. It was developed as part of **Track 2 – NISR Big Data Hackathon 2025**.
+Track 2 — Big Data Hackathon 2025
+Team: [Your Name / Team Name]
+Theme: Predictive Analytics for Child Malnutrition and Policy Targeting
+Focus: Childhood Stunting using 2024 CFSVA Microdata
+Submission Type: Full Stack Dashboard + Policy Brief + Predictive Models
 
----
+🌍 Problem Background
 
-## 🎯 Objectives
+Despite national progress, an estimated 33% of children under five in Rwanda remain stunted — a condition that causes irreversible cognitive, physical, and economic disadvantages. Hidden hunger, driven by micronutrient deficiencies and chronic undernutrition, threatens Rwanda’s long-term human capital development.
 
-- 📍 Map malnutrition and dietary inadequacy hotspots
-- 🧠 Identify socio-economic and structural root causes
-- 🧒🏽 Predict risk of malnutrition among children and women
-- 🏥 Propose localized interventions across health, agriculture, and education
+This project leverages 2024 CFSVA data and machine learning to:
 
----
+🔍 Identify hotspots of stunting and related malnutrition indicators
 
-## 📦 Data Source
+🧠 Model key predictive factors and root causes
 
-- **Survey**: CFSVA 2024 by the National Institute of Statistics of Rwanda (NISR)
-- **Coverage**: Nationally representative household and individual-level data
-- **Units of Analysis**: Children under 5, women of reproductive age, and households
-- **Geography**: Province and district level
+🧩 Recommend evidence-based multisector interventions
 
----
+💻 Deploy an interactive dashboard for policy design and targeting
 
-## 🔍 Key Indicators
+🎯 Objectives
 
-| Domain        | Indicator                           | Source Dataset |
-|---------------|--------------------------------------|----------------|
-| Nutrition     | MUAC (Children & Women), MDD-W       | `df_children`, `df_women` |
-| Food Security | Food shortage, food group spending   | `df_household` |
-| Health Access | ANC visits, supplementation          | `df_women`     |
-| WASH          | Water source, sanitation             | `df_household` |
-| Agriculture   | Garden, livestock, biofortified crops| `df_household` |
+📍 Map district-level stunting, wasting, and underweight using 2024 CFSVA data
 
----
+📊 Model the drivers of stunting via XGBoost, LightGBM, and Logistic Regression
 
-## 🧪 Methodology
+🧠 Predict stunting risk using household-level input simulation
 
-1. **Data Cleaning & Wrangling**: Standardize variables, handle missing data  
-2. **Exploratory Analysis**: Malnutrition by geography, gender, income  
-3. **Geospatial Mapping**: Hotspots, dietary gaps, clustering  
-4. **Root Cause Analysis**: Multivariate modeling (e.g., logistic regression)  
-5. **Predictive Modeling**: Risk prediction using Random Forest, XGBoost  
+📈 Visualize feature importance and geographic disparities
 
----
+🧩 Recommend root cause-based policies and sectoral interventions
 
-## 📈 Outputs
+🧠 Key Insights
 
-- ✅ Geospatial risk maps (folium, kepler.gl)
-- ✅ Statistical models of key malnutrition drivers
-- ✅ Prediction tool for identifying high-risk households
-- ✅ Policy dashboard 
-- ✅ 1–2 page policy brief with actionable insights
+High-stunting districts include: Nyabihu, Burera, Rubavu, Rutsiro, Gakenke
 
----
+Top predictive features across all models:
 
-## 📂 Repository Structure
+MUAC (Mid-Upper Arm Circumference)
 
-```bash
+Vitamin A supplementation status
+
+Household Wealth Index
+
+Dietary diversity (especially women’s MDD-W)
+
+WASH factors (water source, handwashing practices)
+
+Health shocks like diarrhea, fever, and mouth illness remain key risk amplifiers
+
+🔍 Root Causes & Interventions
+🔎 Feature	📉 Root Cause	🎯 Example Intervention
+MUAC (Low)	Inadequate feeding	Growth monitoring & feeding support
+No Vitamin A	Micronutrient deficiency	Supplementation programs
+Low Wealth Index	Chronic poverty	Cash transfers & livelihood programs
+Unsafe Water	Infrastructure gap	Safe water access, boreholes
+Poor Hygiene	Behavior/awareness	Hygiene promotion, handwashing stations
+Low Dietary Diversity	Food insecurity, access	Nutrition-sensitive agriculture, women-led farming
+Low Maternal Education	Knowledge gap	Parenting education & adult literacy
+💻 Dashboard Features
+
+Built with Streamlit and Plotly, the dashboard has four core tabs:
+
+🗺️ Geographic Insights
+Choropleth maps of malnutrition indicators across districts and provinces
+
+📈 Feature Importance
+Visualization of top features from XGBoost, LightGBM, and Logistic Regression
+
+🧠 Predict Risk (Simulator)
+Heuristic stunting risk calculator based on key household inputs
+
+🧩 Root Cause Analysis & Policies
+Data-informed policy mapping for each top feature and geographic priority
+
+📦 Repository Structure
 HiddenHungerRwanda/
 │
-├── data/               # Cleaned & raw data (excluded from GitHub)
-├── notebooks/          # Jupyter Notebooks (EDA, modeling, mapping)
-├── scripts/            # Python scripts for preprocessing & modeling
-├── outputs/            # Figures, maps, and charts
-├── docs/               # Policy brief and supplementary documentation
-├── requirements.txt    # Python dependencies
-└── README.md           # This file
+├── app.py                          # Streamlit dashboard
+├── data/                           # CSV and GeoJSON data files
+│   ├── district_geospatial_summary.csv
+│   ├── xgb_feature_importances.csv
+│   ├── LightGBM_feature_importance.csv
+│   ├── logreg_feature_importance.csv
+│   ├── rwanda_districts.geojson
+│   └── rwanda_province.json
+├── outputs/                        # Maps, charts, feature graphs
+├── notebooks/                      # EDA, modeling, PCA, MI, etc.
+├── scripts/                        # Model training, preprocessing
+├── docs/                           # Policy brief, write-ups
+├── requirements.txt                # Python dependencies
+└── README.md                       # This file
+
+📈 Data Sources
+
+Survey: 2024 Comprehensive Food Security and Vulnerability Assessment (CFSVA)
+
+Publisher: National Institute of Statistics of Rwanda (NISR)
+
+Coverage: Nationally representative household, women, and child data
+
+Geography: Province and District level
+
+Domain	Indicator Examples	Dataset
+Nutrition	MUAC, MDD-W, Birth Weight	df_children, df_women
+Food Security	Food shortages, spending patterns	df_household
+Health Access	ANC visits, vitamin A intake	df_women
+WASH	Water source, handwashing, toilets	df_household
+Agriculture	Garden, livestock, biofortified crops	df_household
+🧪 Methodology Overview
+
+Data Wrangling: Standardized variables, missing value imputation
+
+Exploratory Analysis: Distribution of indicators by geography & wealth quintiles
+
+Modeling: XGBoost, LightGBM, Logistic Regression for feature selection
+
+Visualization: Choropleth maps, bar plots, summary stats
+
+Risk Simulation: Heuristic model using key predictors
+
+Root Cause Analysis: Link features → root causes → recommended policies
+
+📊 Outputs
+
+✅ ML-based feature importance rankings
+
+✅ Interactive stunting risk simulator
+
+✅ Choropleth maps for stunting, wasting, underweight
+
+✅ Root-cause linked policy recommendations
+
+✅ Executive Summary / Policy Brief (2 pages)
