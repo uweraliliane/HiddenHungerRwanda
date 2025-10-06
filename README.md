@@ -86,4 +86,20 @@ Streamlit dashboard includes the following interactive tabs:
 ---
 
 ## 📂 Repository Structure
+HiddenHungerRwanda/
+├── app.py                         # Streamlit dashboard
+├── README.md
+├── To whom Uwera Liliane final.pdf
+├── demo/
+│   └── demo.webm           # Demo walkthrough
+├── Data/
+│   ├── district_geospatial_summary.csv
+│   ├── gadm41_RWA_shp.zip        # Shapefiles
+│   ├── rwanda_districts.geojson
+│   ├── rwanda_province.json
+│   ├── xgb_feature_importances.csv
+│   ├── lgbm_smote_classweight_feature_importance.csv
+│   ├── logreg_feature_importance.csv
+│   ├── Microdata.zip             # Raw data of 
+│   └── LightGBM_feature_importance.csv
 
