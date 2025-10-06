@@ -1,68 +1,87 @@
 # 🇷🇼 Ending Hidden Hunger in Rwanda
 
-**Track 2 — Big Data Hackathon 2025**  
-**Team:** [Your Name or Team Name]  
-**Theme:** Predictive Analytics for Child Malnutrition  
-**Focus Area:** Childhood Stunting using 2024 CFSVA Data
+**Track 2 – Big Data Hackathon 2025**  
+Team: [Your Name or Team Name]  
+Language: Python  
+Deployment: Streamlit | [Add live link if available]
 
 ---
 
 ## 🌍 Project Overview
 
-Despite progress in recent years, over **33% of Rwandan children under 5** remain stunted. This project uses national survey data and machine learning to:
+Despite progress in recent years, over **33% of Rwandan children under 5** remain stunted.  
+This project leverages national data and machine learning to:
 
 - Identify **malnutrition hotspots**
-- Model **key predictive factors**
-- Simulate **stunting risk** based on household inputs
-- Recommend **data-driven interventions**
-- Provide a user-friendly **dashboard** for policy support
+- Model **key predictive risk factors**
+- Simulate **household-level stunting risk**
+- Recommend **evidence-based policy interventions**
+- Provide a **dashboard** for government and NGO planning
+
+---
+
+## 🧭 Table of Contents
+
+- [🎯 Objectives](#🎯-objectives)
+- [📊 Key Findings](#📊-key-findings)
+- [🧠 Root Cause Summary](#🧠-root-cause-summary)
+- [💻 Dashboard Features](#💻-dashboard-features)
+- [📂 Repository Structure](#📂-repository-structure)
+- [📦 Installation](#📦-installation)
+- [📈 Data Sources](#📈-data-sources)
+- [📝 License](#📝-license)
 
 ---
 
 ## 🎯 Objectives
 
-- 🗺️ Map stunting, wasting, and underweight rates across districts and provinces
-- 🤖 Train models (XGBoost, LightGBM, Logistic Regression) to identify key predictors
-- 🧠 Simulate child stunting risk using household data
-- 📍 Pinpoint root causes of malnutrition
-- 📊 Provide a dashboard for policy planning and simulation
+- 🗺️ Map stunting, wasting, and underweight rates across Rwanda
+- 🤖 Train models (XGBoost, LightGBM, Logistic Regression) on CFSVA 2024 data
+- 📍 Pinpoint top malnutrition predictors
+- 🧠 Simulate stunting risk using household inputs
+- 🧩 Recommend root-cause-based interventions
+- 📊 Build a decision-support dashboard
 
 ---
 
-## 🧠 Key Findings
+## 📊 Key Findings
 
-- **High-Stunting Districts:** Nyabihu, Rubavu, Rutsiro, Burera, Gakenke
-- **Top Risk Factors:**
-  - Child MUAC (Mid-Upper Arm Circumference)
-  - Vitamin A intake
-  - Household Wealth Index
-  - Dietary Diversity (Women)
-  - WASH variables (water source, handwashing practices)
-  - Recent illnesses (diarrhea, fever)
+**Top 5 High-Stunting Districts:**
+
+- Nyabihu, Rubavu, Rutsiro, Burera, Gakenke
+
+**Top Predictive Risk Factors:**
+
+- Mid-Upper Arm Circumference (MUAC)
+- Vitamin A intake
+- Household Wealth Index
+- Dietary Diversity (Women)
+- WASH conditions (water source, handwashing)
+- Illness history (diarrhea, fever)
 
 ---
 
-## 🔍 Root Cause Summary
+## 🧠 Root Cause Summary
 
-| Feature               | Root Cause               | Suggested Intervention           |
-|----------------------|--------------------------|----------------------------------|
-| Low MUAC             | Undernutrition           | Growth monitoring, feeding aid   |
-| No Vitamin A         | Micronutrient deficiency | Supplementation campaigns        |
-| Low Wealth Index     | Poverty                  | Cash transfers, job programs     |
-| Unsafe Water Source  | Infrastructure gaps      | Safe water access, WASH support  |
-| Rare Handwashing     | Behavior & education     | Hygiene campaigns                |
-| Low Dietary Diversity| Food insecurity          | Home gardens, nutrition farming  |
+| Feature               | Root Cause                  | Suggested Intervention                    |
+|----------------------|-----------------------------|-------------------------------------------|
+| Low MUAC             | Undernutrition              | Growth monitoring, feeding support        |
+| No Vitamin A         | Micronutrient deficiency    | Supplementation campaigns                 |
+| Low Wealth Index     | Poverty                     | Cash transfers, job creation programs     |
+| Unsafe Water Source  | Infrastructure gaps         | Water access projects, WASH support       |
+| Rare Handwashing     | Hygiene knowledge gap       | Community hygiene education               |
+| Low Dietary Diversity| Food insecurity             | Kitchen gardens, local nutrition farming  |
 
 ---
 
 ## 💻 Dashboard Features
 
-Interactive Streamlit app with the following tabs:
+Streamlit dashboard includes the following interactive tabs:
 
-1. **🗺️ Geographic Insights** — Choropleth maps of malnutrition indicators  
-2. **📈 Feature Importance** — Visualize top predictive features per model  
-3. **🧠 Predict Risk** — Estimate child stunting risk via user inputs  
-4. **🧩 Root Causes & Policies** — Feature-level RCA with intervention mapping
+- 🗺️ **Geographic Insights** – Choropleth maps by district & province
+- 📈 **Feature Importance** – Model-driven risk factor analysis
+- 🧠 **Stunting Risk Simulator** – Predict household stunting risk
+- 🧩 **Root Causes & Interventions** – RCA and policy mapping
 
 ---
 
