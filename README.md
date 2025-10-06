@@ -1,9 +1,9 @@
 # 🇷🇼 Ending Hidden Hunger in Rwanda
 
 **Track 2 – Big Data Hackathon 2025**  
-Team: [Your Name or Team Name]  
+Team: UWERA Liliane  
 Language: Python  
-Deployment: Streamlit | [Add live link if available]
+Deployment: Streamlit |
 
 ---
 
