@@ -1,14 +1,13 @@
-🇷🇼 Ending Hidden Hunger in Rwanda
+🌍 Ending Hidden Hunger in Rwanda
 Track 2 – Big Data Hackathon 2025
 
 Team: UWERA Liliane
 Language: Python
 Deployment: Streamlit
 
-🌍 Project Overview
+📊 Project Overview
 
-Despite progress in recent years, over 33% of Rwandan children under 5 remain stunted.
-This project leverages national data and machine learning to:
+Despite progress in recent years, over 33% of Rwandan children under 5 remain stunted. This project leverages national data and machine learning to:
 
 🗺️ Identify malnutrition hotspots
 
@@ -20,42 +19,32 @@ This project leverages national data and machine learning to:
 
 💻 Provide a decision-support dashboard for government and NGO planning
 
-🧭 Table of Contents
-
 🎯 Objectives
 
-📊 Key Findings
+Map stunting, wasting, and underweight rates across Rwanda
 
-🧠 Root Cause Summary
+Train models (XGBoost, LightGBM, Logistic Regression) on CFSVA 2024 data
 
-💻 Dashboard Features
+Pinpoint top malnutrition predictors
 
-📂 Repository Structure
+Simulate stunting risk using household inputs
 
-📦 Installation
+Recommend root-cause-based interventions
 
-📈 Data Sources
-
-📝 License
-
-🎯 Objectives
-
-🗺️ Map stunting, wasting, and underweight rates across Rwanda
-
-🤖 Train models (XGBoost, LightGBM, Logistic Regression) on CFSVA 2024 data
-
-📍 Pinpoint top malnutrition predictors
-
-🧠 Simulate stunting risk using household inputs
-
-🧩 Recommend root-cause-based interventions
-
-📊 Build a decision-support dashboard
+Build a decision-support dashboard
 
 📊 Key Findings
-
 Top 5 High-Stunting Districts:
-Nyabihu, Rubavu, Rutsiro, Burera, Gakenke
+
+Nyabihu
+
+Rubavu
+
+Rutsiro
+
+Burera
+
+Gakenke
 
 Top Predictive Risk Factors:
 
@@ -95,7 +84,7 @@ The Streamlit dashboard includes the following interactive tabs:
 HiddenHungerRwanda/
 ├── app.py                               # Streamlit dashboard
 ├── README.md                            # Project documentation
-├── To whom Uwera Liliane final.pdf      # Project report
+├── To_whom_Uwera_Liliane_final.pdf      # Project report
 ├── demo/
 │   └── demo.webm                        # Demo walkthrough
 ├── Data/
@@ -110,6 +99,9 @@ HiddenHungerRwanda/
 │   └── Microdata.zip                    # Raw data
 
 📦 Installation
+
+To get started with the project, follow these steps:
+
 git clone https://github.com/<yourusername>/HiddenHungerRwanda.git
 cd HiddenHungerRwanda
 pip install -r requirements.txt
@@ -119,23 +111,31 @@ streamlit run app.py
 
 This project uses the following publicly available dataset:
 
-National Institute of Statistics of Rwanda (NISR).
-Comprehensive Food Security and Vulnerability Analysis (CFSVA) 2024, Version 0.1 – Public Use Dataset.
+National Institute of Statistics of Rwanda (NISR)
+
+Comprehensive Food Security and Vulnerability Analysis (CFSVA) 2024, Version 0.1 – Public Use Dataset
+
 Kigali, Rwanda: NISR, 2024.
-Available from: https://microdata.statistics.gov.rw
+
+Available from: NISR Microdata Portal
 
 License: Public Use Dataset — for research and policy analysis purposes.
 Access: Free download from the NISR Microdata Portal.
 
 🧩 Variables Used in Modeling
-Category	Variables Used	Description
-Child Health	MUAC (Mid-Upper Arm Circumference), Illness history (fever, diarrhea)	Indicators of child nutritional and health status
-Dietary Factors	Vitamin A intake, Dietary diversity (children & women)	Measures micronutrient adequacy and diet variety
-Socioeconomic Status	Household wealth index, Education level of caregiver	Reflects income, assets, and knowledge access
-WASH Indicators	Drinking water source, Handwashing availability	Relates to hygiene and disease prevention
-Household Demographics	Household size, Region (province/district)	Contextual and spatial determinants of malnutrition
+Categories:
 
-⚠️ Variables directly implying stunting (e.g., height-for-age Z-scores) were excluded to prevent data leakage.
+Child Health: MUAC (Mid-Upper Arm Circumference), Illness history (fever, diarrhea)
+
+Dietary Factors: Vitamin A intake, Dietary diversity (children & women)
+
+Socioeconomic Status: Household wealth index, Education level of caregiver
+
+WASH Indicators: Drinking water source, Handwashing availability
+
+Household Demographics: Household size, Region (province/district)
+
+⚠️ Note: Variables directly implying stunting (e.g., height-for-age Z-scores) were excluded to prevent data leakage.
 
 ⚙️ Data Preprocessing Steps
 
@@ -151,8 +151,6 @@ Balanced the dataset using SMOTE and class weighting
 
 🗺️ Geospatial Data
 
-Used for mapping and visualization:
-
 Rwanda district and province boundaries from GADM v4.1 shapefiles
 
 Converted to GeoJSON format for integration in Streamlit maps
@@ -160,10 +158,11 @@ Converted to GeoJSON format for integration in Streamlit maps
 🧾 Citation for Use
 
 Data Citation:
+
 “National Institute of Statistics of Rwanda (NISR). Comprehensive Food Security and Vulnerability Analysis (CFSVA) 2024, Version 0.1, Public Use Dataset.”
 
 📝 License
 
 This project is for educational and research purposes under the Big Data Hackathon 2025 – Ending Hidden Hunger in Rwanda (Track 2).
-Data © NISR (2024) — Public Use Dataset.
-Dashboard and model code © UWERA Liliane (2025).
+Data: © NISR (2024) — Public Use Dataset.
+Dashboard and model code: © UWERA Liliane (2025).
