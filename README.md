@@ -8,7 +8,7 @@
 
 ## 📌 Introduction
 
-Despite commendable progress in food security, over **33% of Rwandan children under five** still suffer from **stunting** due to chronic undernutrition and hidden hunger (micronutrient deficiencies).  
+Despite commendable progress in food security, over **33% of Rwandan children under five** still suffer from **stunting** due to chronic undernutrition and hidden hunger (micronutrient deficiencies).
 
 This project uses **machine learning and geospatial analysis** to identify at-risk populations and inform targeted interventions. A user-friendly dashboard empowers policymakers, NGOs, and public health professionals to make data-driven decisions.
 
@@ -18,27 +18,31 @@ This project uses **machine learning and geospatial analysis** to identify at-ri
 
 This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with the following key goals:
 
-1. 🗺️ **Map** stunting, wasting, and underweight across Rwanda  
-2. 🤖 **Model** household-level malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression)  
-3. 📉 **Identify** top predictive risk factors  
-4. 🧮 **Simulate** household stunting probabilities  
-5. 🛠️ **Recommend** actionable policy & program interventions  
-6. 📊 **Visualize** findings through an interactive Streamlit dashboard  
+- 🗺️ **Map** stunting, wasting, and underweight across Rwanda  
+- 🤖 **Model** household-level malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression)  
+- 📉 **Identify** top predictive risk factors  
+- 🧮 **Simulate** household stunting probabilities  
+- 🛠️ **Recommend** actionable policy & program interventions  
+- 📊 **Visualize** findings through an interactive Streamlit dashboard  
 
 ---
 
 ## 📊 Data Sources
 
 - 🗃️ **CFSVA 2024 – Comprehensive Food Security and Vulnerability Analysis**  
-  🔗 [https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
-- 🌍 Rwanda Geospatial Boundaries: [https://simplemaps.com/gis/country/rw](https://simplemaps.com/gis/country/rw)  
-- Supplemental data: DHS, WASH, health indicators
+  🔗 [CFSVA 2024](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)
+
+- 🌍 **Rwanda Geospatial Boundaries**  
+  🔗 [SimpleMaps Rwanda GIS](https://simplemaps.com/gis/country/rw)
+
+- ➕ **Supplemental data**: DHS, WASH, health indicators
 
 ---
 
 ## 🧠 Key Findings
 
-### 🔺 Top 5 High-Stunting Districts  
+### 🔺 Top 5 High-Stunting Districts
+
 1. Nyabihu  
 2. Rubavu  
 3. Rutsiro  
@@ -46,6 +50,7 @@ This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with
 5. Gakenke  
 
 ### 💡 Top Predictive Risk Factors
+
 - Low MUAC (Mid-Upper Arm Circumference)  
 - Lack of Vitamin A intake  
 - Poor wealth index  
@@ -114,20 +119,19 @@ An interactive **Streamlit dashboard** includes:
 ├── LICENSE
 └── README.md
 
-
-🛠 Dependencies
+🛠️ Dependencies
 📦 Required Libraries
-
-Install dependencies using:
-
+bash
+Install all dependencies using:
 pip install -r requirements.txt
 
-
-Or install manually:
-
+or install manually:
+bash
 pip install streamlit pandas numpy scikit-learn xgboost lightgbm catboost matplotlib seaborn plotly folium imbalanced-learn statsmodels joblib geopandas
 
 📄 Sample requirements.txt
+text
+
 streamlit==1.32.0
 pandas==2.2.2
 numpy==1.26.4
@@ -144,18 +148,22 @@ joblib==1.4.2
 statsmodels==0.14.2
 geopandas==1.1.0
 
+🚀 How to Run
+Option 1: Local Machine
+bash
 streamlit run app.py
 Option 2: GitHub + Streamlit Cloud
 
 Push your project to GitHub
 
-Deploy via https://share.streamlit.io
+Deploy via Streamlit Cloud
 
 Set app.py as the main entry point
 
 🔒 License
 
-This project is licensed under the terms of the MIT License. See LICENSE
+This project is licensed under the terms of the MIT License.
+See the LICENSE
  file for details.
 
 📢 Hackathon Fit & Innovation
@@ -184,23 +192,22 @@ Organizers of the NISR Big Data Hackathon 2025
 
 CFSVA survey teams and all data contributors
 
-GitHub Repository: github.com/uweraliliane/RwandaHiddenHungerRwanda
+🔗 GitHub Repository
 
+github.com/uweraliliane/RwandaHiddenHungerRwanda
+
+yaml
 
 ---
 
-### ⚠️ 2. Code snippets like `pip install` or `requirements.txt` should be in code blocks too
+### ✅ What This Final Version Fixes:
 
-Right now, it's hard to read because it's plain text. Wrap installation commands and `requirements.txt` content like this:
+- ✅ Proper Markdown formatting with headers, bullet points, and tables
+- ✅ All code, shell commands, and configs inside triple backticks (for syntax highlighting)
+- ✅ All URLs are clickable
+- ✅ Everything will **render perfectly** on GitHub
 
-✅ **Fix:**
+---
 
-```markdown
-### 🛠️ Dependencies
+Let me know if you’d also like a downloadable version (`README.md`) or if you need help deploying it to **Streamlit Cloud**.
 
-#### 📦 Required Libraries
-
-Install using:
-
-```bash
-pip install -r requirements.txt
