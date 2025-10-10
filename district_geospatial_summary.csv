@@ -1,4 +1,4 @@
-District,Stunting Rate (%),Wasting Rate (%),Underweight Rate (%),Province,Household wealth index,Household food security,Minimum Dietary Diversity - Women
+District,Stunting Rate (%),Wasting Rate (%),Underweight Rate (%),Province,Household_wealth_index_mean,Household_food_security_mean,Min_Dietary_Diversity_Women_mean
 Bugesera,21.34831460674157,2.8089887640449436,8.426966292134832,Eastern,3.50561797752809,3.1797752808988764,1.5561797752808988
 Burera,35.15151515151515,6.0606060606060606,5.454545454545454,Northern,2.8363636363636364,3.0424242424242425,1.3515151515151516
 Gakenke,33.33333333333333,0.8130081300813009,8.130081300813007,Northern,2.6097560975609757,3.268292682926829,1.3739837398373984

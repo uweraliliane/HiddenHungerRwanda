@@ -4,7 +4,7 @@ import plotly.express as px
 import json
 
 # -------------------------------
-# PAGE CONFIG
+# PAGE CONFIGURATION
 # -------------------------------
 st.set_page_config(
     page_title="🇷🇼 Ending Hidden Hunger in Rwanda",
@@ -27,31 +27,27 @@ with st.sidebar:
     st.markdown("👨‍💻 Built for **NISR Big Data Hackathon 2025**")
 
 # -------------------------------
-# PAGE HEADER
+# HEADER
 # -------------------------------
 st.title("🌾 Ending Hidden Hunger in Rwanda")
 st.markdown("### 🎯 A Data Science Tool for Nutrition Policy & Action")
-
 st.success("""
 This dashboard visualizes **stunting risk**, **geographic disparities**, and **root causes** 
 to inform evidence-based interventions in Rwanda. Powered by machine learning and national survey data.
 """)
 
 # -------------------------------
-# LOAD DATA
+# LOAD DATA FUNCTION
 # -------------------------------
 @st.cache_data
 def load_data():
     data_path = "Data/"  # Relative path
-
     district_df = pd.read_csv(data_path + "district_geospatial_summary.csv")
     xgb_imp = pd.read_csv(data_path + "xgb_feature_importances.csv")
-    lgbm_imp = pd.read_csv(data_path + "LightGBM_feature_importance.csv")
+    lgbm_imp = pd.read_csv(data_path + "lgbm_smote_classweight_feature_importance.csv")
     logreg_imp = pd.read_csv(data_path + "logreg_feature_importance.csv")
     catboost_imp = pd.read_csv(data_path + "cat_feature_importances.csv")
     model_perf = pd.read_csv(data_path + "model_comparison_results.csv")
-
-    #st.write("📋 Model Performance Columns:", model_perf.columns.tolist())
 
     with open(data_path + "rwanda_districts.geojson", "r", encoding="utf-8") as f:
         geo_district = json.load(f)
@@ -60,17 +56,11 @@ def load_data():
 
     return district_df, xgb_imp, lgbm_imp, logreg_imp, catboost_imp, model_perf, geo_district, geo_province
 
+# Load all data
 district_df, xgb_imp, lgbm_imp, logreg_imp, catboost_imp, model_perf, geo_district, geo_province = load_data()
 
 # -------------------------------
-# RISK RANKING TABLES
-# -------------------------------
-sorted_df = district_df.sort_values(by="Stunting Rate (%)", ascending=False)
-high_risk = sorted_df.head(5)[["District", "Stunting Rate (%)", "Household wealth index", "Minimum Dietary Diversity - Women"]].reset_index(drop=True)
-low_risk = sorted_df.tail(5)[["District", "Stunting Rate (%)", "Household wealth index", "Minimum Dietary Diversity - Women"]].reset_index(drop=True)
-
-# -------------------------------
-# TABS
+# TABS SETUP
 # -------------------------------
 tab1, tab2, tab3, tab4 = st.tabs([
     "🗺️ Geographic Insights",
@@ -82,14 +72,10 @@ tab1, tab2, tab3, tab4 = st.tabs([
 # ============================================================
 # TAB 1: GEOGRAPHIC INSIGHTS
 # ============================================================
-
 with tab1:
     st.subheader("📍 Geographic Distribution of Malnutrition")
-    st.markdown("Analyze key malnutrition indicators (stunting, wasting, underweight) across Rwanda by **district** or **province** level.")
+    st.markdown("Analyze **stunting**, **wasting**, and **underweight** rates across Rwanda.")
 
-    # ------------------------------
-    # Filters
-    # ------------------------------
     col1, col2, col3 = st.columns(3)
     with col1:
         region_level = st.selectbox("🗺️ Region Level", ["District", "Province"])
@@ -100,9 +86,6 @@ with tab1:
     with col3:
         color_scale = st.selectbox("🎨 Color Scale", ["YlOrRd", "Viridis", "Reds", "Blues", "YlGnBu"])
 
-    # ------------------------------
-    # Data Aggregation
-    # ------------------------------
     if region_level == "District":
         df = district_df.copy()
         geo = geo_district
@@ -114,12 +97,8 @@ with tab1:
         location_col = "Province"
         featureidkey = "properties.name"
 
-    # Handle missing or non-numeric values
     df[mal_type] = pd.to_numeric(df[mal_type], errors="coerce").fillna(0)
 
-    # ------------------------------
-    # Choropleth Map
-    # ------------------------------
     try:
         fig_map = px.choropleth(
             df,
@@ -139,38 +118,32 @@ with tab1:
         fig_map.update_geos(fitbounds="locations", visible=False)
         st.plotly_chart(fig_map, use_container_width=True)
     except Exception as e:
-        st.error("⚠️ Map rendering failed. Showing raw data below.")
-        st.dataframe(df.head())
+        st.error("⚠️ Map failed to render. Check data format or GeoJSON.")
 
-    # ------------------------------
-    # Ranked Table (District Only)
-    # ------------------------------
     if region_level == "District":
-        st.markdown("### 🏅 District Ranking by Stunting Rate")
-        ranked_districts = district_df[["District", "Stunting Rate (%)"]].sort_values(
-            by="Stunting Rate (%)", ascending=False
-        ).reset_index(drop=True)
+        st.markdown("### 🏅 Top & Bottom Districts by Stunting Rate")
+        high_risk = district_df.sort_values(by="Stunting Rate (%)", ascending=False).head(5)
+        low_risk = district_df.sort_values(by="Stunting Rate (%)", ascending=True).head(5)
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("#### 🔴 High Risk Districts")
+            st.dataframe(high_risk[["District", "Stunting Rate (%)"]])
+        with col2:
+            st.markdown("#### 🟢 Low Risk Districts")
+            st.dataframe(low_risk[["District", "Stunting Rate (%)"]])
 
-        with st.expander("📋 View Ranked Districts"):
-            for i, row in ranked_districts.iterrows():
-                st.write(f"{i+1}. **{row['District']}** — {row['Stunting Rate (%)']:.1f}%")
-
-    # ------------------------------
-    # Summary Statistics
-    # ------------------------------
     st.markdown("### 📊 Summary Statistics")
     st.dataframe(df[[location_col, mal_type]].describe().T)
 
 # ============================================================
-# TAB 2: FEATURE IMPORTANCE + MODEL PERFORMANCE
+# TAB 2: FEATURE IMPORTANCE
 # ============================================================
 with tab2:
     st.subheader("📈 Key Predictors of Stunting (ML Models)")
-    st.markdown("These charts show the most important predictors of stunting from different models:")
 
-    model_choice = st.selectbox(
-        "Select Model", ["XGBoost", "LightGBM", "Logistic Regression", "CatBoost"]
-    )
+    model_choice = st.selectbox("Select Model", [
+        "XGBoost", "LightGBM", "Logistic Regression", "CatBoost"
+    ])
 
     if model_choice == "XGBoost":
         df_imp = xgb_imp.rename(columns={"Importance": "Score"})
@@ -188,8 +161,7 @@ with tab2:
     df_imp = df_imp.sort_values("Score", ascending=True).tail(10)
 
     fig_imp = px.bar(
-        df_imp,
-        x="Score", y="Feature",
+        df_imp, x="Score", y="Feature",
         orientation="h",
         color="Score",
         color_continuous_scale=color,
@@ -202,21 +174,12 @@ with tab2:
     )
     st.plotly_chart(fig_imp, use_container_width=True)
 
-    st.markdown("### 📊 Model Performance Comparison")
-
-        # Optional: Rename columns for consistency (or keep original names)
-    model_perf.rename(columns={
-        "AUC Score": "AUC-ROC",
-        "F1-Score": "F1-score"  # For consistent formatting
-    }, inplace=True)
-
-    # Format numeric columns
-    numeric_cols = ['Accuracy', 'Precision', 'Recall', 'F1-score', 'AUC-ROC']
-    for col in numeric_cols:
+    # Model Performance Table
+    st.markdown("### 🧪 Model Performance Comparison")
+    model_perf.rename(columns={"AUC Score": "AUC-ROC", "F1-Score": "F1-score"}, inplace=True)
+    for col in ['Accuracy', 'Precision', 'Recall', 'F1-score', 'AUC-ROC']:
         model_perf[col] = pd.to_numeric(model_perf[col], errors='coerce')
 
-    # Display nicely formatted table
-    st.markdown("### 📊 Model Performance Comparison")
     st.dataframe(
         model_perf.style.format({
             "Accuracy": "{:.3f}",
@@ -229,137 +192,114 @@ with tab2:
     )
 
 # ============================================================
-# TAB 3: STUNTING RISK SIMULATOR
-# ============================================================
-# ============================================================
-# TAB 3: STUNTING RISK SIMULATOR (UPDATED)
+# TAB 3: STUNTING RISK SIMULATION
 # ============================================================
 with tab3:
     st.subheader("🧠 Predict Stunting Risk (Simulation)")
-    st.markdown("Estimate stunting risk based on key household and child characteristics.")
+    st.markdown("Estimate risk using key household and child features.")
 
     with st.expander("ℹ️ How this works"):
         st.info("""
-        This is a simplified scoring model based on health research and machine learning results.  
-        It helps illustrate how different risk factors contribute to stunting in children.  
-        **Note:** This is not a clinical tool, but a data-informed simulation.
+        This tool simulates stunting risk based on real-world predictors.
+        It uses simple scoring logic to highlight high-risk profiles — not clinical diagnostics.
         """)
 
-    with st.form("predict_form"):
-        st.markdown("#### 👶 Child & Household Characteristics")
-
+    with st.form("risk_form"):
+        st.markdown("#### 👶 Household & Child Profile")
         col1, col2 = st.columns(2)
+
         with col1:
             muac = st.number_input("Child MUAC (mm)", 80, 200, 125)
             child_age = st.number_input("Child Age (months)", 0, 59, 24)
             fortified_porridge = st.selectbox("Drank fortified porridge?", ["Yes", "No"])
-            vitamin_a = st.selectbox("Received Vitamin A (last 6 months)?", ["Yes", "No"])
-            water_source = st.selectbox("Main water source", ["Piped", "Protected", "Unprotected", "Far"])
+            vitamin_a = st.selectbox("Received Vitamin A?", ["Yes", "No"])
+            water_source = st.selectbox("Water source", ["Piped", "Protected", "Unprotected", "Far"])
+            maternal_education = st.selectbox("Mother completed primary school?", ["Yes", "No"])
+
         with col2:
             mouth_illness = st.selectbox("Recent mouth illness?", ["No", "Yes"])
-            solid_food_freq = st.slider("Solid food meals per day", 0, 5, 2)
-            handwash_before_meal = st.selectbox("Handwashing before meals?", ["Yes", "No"])
-            wealth_index = st.slider("Household Wealth Index", 1.0, 5.0, 3.0)
-            disability = st.selectbox("Any disability in household?", ["No", "Yes"])
+            solid_food = st.slider("Solid meals/day", 0, 5, 2)
+            handwash = st.selectbox("Handwashing before meals?", ["Yes", "No"])
+            wealth = st.slider("Wealth Index", 1.0, 5.0, 3.0)
+            disability = st.selectbox("Disability in household?", ["No", "Yes"])
+            household_size = st.slider("Household size (people)", 1, 20, 6)
 
-        submitted = st.form_submit_button("🔍 Predict Risk")
+        submitted = st.form_submit_button("🔍 Predict")
 
     if submitted:
-        # ---------------------------
-        # Risk scoring logic
-        # ---------------------------
-        risk = 0.1  # base risk
+        # Basic risk score
+        risk = 0.1
 
+        # Risk logic
         if muac < 125: risk += 0.25
         if fortified_porridge == "No": risk += 0.15
         if vitamin_a == "No": risk += 0.10
         if water_source in ["Unprotected", "Far"]: risk += 0.10
         if mouth_illness == "Yes": risk += 0.10
-        if solid_food_freq < 2: risk += 0.10
-        if handwash_before_meal == "No": risk += 0.05
-        if wealth_index <= 2: risk += 0.15
+        if solid_food < 2: risk += 0.10
+        if handwash == "No": risk += 0.05
+        if wealth <= 2: risk += 0.15
         if disability == "Yes": risk += 0.05
-        if child_age < 12: risk += 0.05  # higher risk in infants
+        if child_age < 12: risk += 0.05
+        if maternal_education == "No": risk += 0.10
+        if household_size >= 8: risk += 0.05
 
-        risk_percentage = min(risk * 100, 100)
+        risk_percent = min(risk * 100, 100)
 
-        # ---------------------------
-        # Display results
-        # ---------------------------
-        st.markdown("### 🧮 Prediction Result")
-        st.metric("Estimated Stunting Risk", f"{risk_percentage:.1f} %")
+        st.metric("Estimated Stunting Risk", f"{risk_percent:.1f} %")
 
-        if risk_percentage > 50:
-            st.warning("🔴 High Risk of Stunting — Consider urgent interventions.")
-        elif risk_percentage > 30:
-            st.info("🟠 Moderate Risk — Recommend monitoring and support.")
+        # Interpretation
+        if risk_percent > 50:
+            st.warning("🔴 High Risk of Stunting — Consider urgent action.")
+        elif risk_percent > 30:
+            st.info("🟠 Moderate Risk — Needs support.")
         else:
-            st.success("🟢 Low Risk of Stunting")
-
-        with st.expander("📌 Interpretation"):
-            st.markdown("""
-            - **MUAC < 125 mm:** Indicates possible malnutrition  
-            - **Lack of fortified porridge or Vitamin A:** Nutrition gaps  
-            - **Unsafe water & hygiene:** Increased infection risk  
-            - **Low wealth index / disability:** Social vulnerability  
-            - **Young age (<12 months):** Early stunting risk  
-            """)
-        st.markdown("### 🧭 Risk Categories")
-        st.markdown("""
-        - 🔴 **High Risk**: > 50% — Urgent attention  
-        - 🟠 **Moderate Risk**: 31–50% — Monitor and support  
-        - 🟢 **Low Risk**: ≤ 30% — Normal growth expected
-        """)
+            st.success("🟢 Low Risk — Normal growth expected.")
 
 # ============================================================
-# TAB 4: ROOT CAUSES & POLICIES
-# ============================================================
-# ============================================================
-# TAB 4: ROOT CAUSES & POLICY ACTIONS (REFINED)
+# TAB 4: ROOT CAUSES & POLICY RECOMMENDATIONS
 # ============================================================
 with tab4:
-    st.subheader("🧩 Root Causes & Policy Actions")
-    st.markdown("Based on data analysis, machine learning models, and public health research, these are the key drivers of stunting in Rwanda and recommended actions:")
+    st.subheader("🧩 Root Causes & Policy Recommendations")
 
-    st.markdown("### 📌 Root Causes of Stunting (Data-Informed)")
+    st.markdown("### 🔍 Data-Informed Root Causes")
     st.markdown("""
-    - 🍼 **Low dietary diversity** and poor complementary feeding practices  
-    - 🚱 **Unsafe water sources** and inadequate hand hygiene  
-    - 💰 **Poverty** and low household wealth index  
-    - 👩‍🏫 **Low maternal education** and limited nutrition knowledge  
-    - 🏥 **Gaps in antenatal/postnatal care** and vitamin A supplementation  
-    - 👨‍👩‍👧 **Large household size** and poor resource allocation  
-    - ♿ **Disability within households** limiting food security or care capacity  
+    - 🍼 Low dietary diversity and poor feeding practices  
+    - 🚱 Unsafe water and poor hygiene  
+    - 💰 Household poverty and food insecurity  
+    - 👩‍🏫 Low maternal education  
+    - 🏥 Incomplete antenatal/postnatal care  
+    - 👨‍👩‍👧 Large households / care strain  
+    - ♿ Disability limiting caregiving capacity  
     """)
 
-    st.markdown("### 🛠️ Policy Recommendations")
-
-    st.info("🔹 Short-Term Actions (0–1 year):")
+    st.info("### 🛠️ Short-Term Actions (0–1 Year)")
     st.markdown("""
-    - Deploy **community IYCF counseling** and home visits for at-risk households  
-    - Distribute **fortified porridge and micronutrient powders** to vulnerable children  
-    - Increase **access to clean water** and promote **safe handwashing behaviors**  
-    - Ensure **Vitamin A** and **deworming coverage** in child health campaigns  
+    - Community-based IYCF counseling  
+    - Distribute fortified porridge & micronutrients  
+    - WASH interventions in critical zones  
+    - Improve Vitamin A & deworming coverage  
+    - Track & support high-risk children using risk tool  
     """)
 
-    st.success("🟢 Medium-Term Strategies (1–3 years):")
+    st.success("### 📈 Medium-Term Strategies (1–3 Years)")
     st.markdown("""
-    - Support **biofortified crops** and **kitchen garden programs**  
-    - Integrate **nutrition into social protection** and cash transfer schemes  
-    - Improve **antenatal care (ANC)** access with embedded nutrition counseling  
-    - Provide **parent-focused nutrition education** in community centers and ECDs  
+    - Promote nutrition-sensitive agriculture  
+    - Integrate nutrition into cash/social protection  
+    - Strengthen antenatal & early childhood services  
+    - Nutrition education via ECD and school systems  
     """)
 
-    st.warning("🟠 Long-Term Vision (3+ years):")
+    st.warning("### 🌱 Long-Term Vision (3+ Years)")
     st.markdown("""
-    - Institutionalize **nutrition in schools and early childhood development (ECD)**  
-    - Develop **real-time monitoring systems** for malnutrition hotspots  
-    - Invest in **equity-first policies** for remote, poor, or underserved districts  
-    - Scale up **nutrition-sensitive agriculture** and women’s empowerment programs  
+    - Embed nutrition in schools & national development plans  
+    - Deploy real-time malnutrition surveillance  
+    - Prioritize rural and vulnerable communities  
+    - Empower women in agri-nutrition value chains  
     """)
 
-# ============================================================
+# -------------------------------
 # FOOTER
-# ============================================================
+# -------------------------------
 st.markdown("---")
-st.caption("Built using Streamlit | Hackathon 2025 | Data Sources: CFSVA, DHS, National Surveys")
+st.caption("Built using Streamlit | Hackathon 2025 | Data Sources: CFSVA 2024, DHS, National Nutrition Surveys")
