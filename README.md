@@ -8,41 +8,37 @@
 
 ## 📌 Introduction
 
-Despite progress in recent years, over **33% of Rwandan children under five** remain stunted due to **micronutrient deficiencies and chronic undernutrition**.  
+Despite commendable progress in food security, over **33% of Rwandan children under five** still suffer from **stunting** due to chronic undernutrition and hidden hunger (micronutrient deficiencies).  
 
-This project leverages **CFSVA 2024 data** and machine learning to:  
-- Identify geographic **malnutrition hotspots**  
-- Model **key risk factors** contributing to undernutrition  
-- Simulate **household-level stunting risk**  
-- Recommend **evidence-based interventions**  
-- Deliver a **decision-support dashboard** for policymakers and NGOs  
+This project uses **machine learning and geospatial analysis** to identify at-risk populations and inform targeted interventions. A user-friendly dashboard empowers policymakers, NGOs, and public health professionals to make data-driven decisions.
 
 ---
 
 ## 🎯 Objectives
 
-This solution addresses the **Hackathon Track 2: Ending Hidden Hunger**, by:
+This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with the following key goals:
 
-1. **Mapping** stunting, wasting, and underweight prevalence across Rwanda  
-2. **Modeling** malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression)  
-3. **Identifying** high-impact predictors and risk factors  
-4. **Simulating** household-level stunting probabilities  
-5. **Recommending** policy and program interventions  
-6. **Visualizing** insights via an interactive Streamlit dashboard  
+1. 🗺️ **Map** stunting, wasting, and underweight across Rwanda  
+2. 🤖 **Model** household-level malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression)  
+3. 📉 **Identify** top predictive risk factors  
+4. 🧮 **Simulate** household stunting probabilities  
+5. 🛠️ **Recommend** actionable policy & program interventions  
+6. 📊 **Visualize** findings through an interactive Streamlit dashboard  
 
 ---
 
 ## 📊 Data Sources
 
-- **Primary Dataset:** [CFSVA 2024 – Comprehensive Food Security and Vulnerability Analysis](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
-- **Provider:** National Institute of Statistics of Rwanda (NISR)  
-- Additional sources: DHS, WASH datasets (if applicable)
+- 🗃️ **CFSVA 2024 – Comprehensive Food Security and Vulnerability Analysis**  
+  🔗 [https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
+- 🌍 Rwanda Geospatial Boundaries: [https://simplemaps.com/gis/country/rw](https://simplemaps.com/gis/country/rw)  
+- Supplemental data: DHS, WASH, health indicators
 
 ---
 
 ## 🧠 Key Findings
 
-### 🔺 Top 5 High-Stunting Districts
+### 🔺 Top 5 High-Stunting Districts  
 1. Nyabihu  
 2. Rubavu  
 3. Rutsiro  
@@ -50,12 +46,12 @@ This solution addresses the **Hackathon Track 2: Ending Hidden Hunger**, by:
 5. Gakenke  
 
 ### 💡 Top Predictive Risk Factors
-- Mid-Upper Arm Circumference (MUAC)  
-- Vitamin A intake  
-- Wealth Index  
-- Dietary Diversity (Women)  
-- Unsafe Water Source  
-- Illness History (Diarrhea, Fever)  
+- Low MUAC (Mid-Upper Arm Circumference)  
+- Lack of Vitamin A intake  
+- Poor wealth index  
+- Low dietary diversity (women)  
+- Unsafe water source  
+- Illness history (diarrhea, fever)  
 
 ---
 
@@ -74,83 +70,137 @@ This solution addresses the **Hackathon Track 2: Ending Hidden Hunger**, by:
 
 ## 💻 Dashboard Features
 
-An interactive **Streamlit dashboard** was developed with the following key components:
+An interactive **Streamlit dashboard** includes:
 
-- 🗺️ **Geographic Insights** – Choropleth maps of malnutrition rates  
-- 📊 **Feature Importance** – Visual analysis of top risk factors  
-- 🧮 **Stunting Risk Simulator** – Household-level predictions  
-- 🧠 **Root Cause & Policy Mapping** – Interventions by predictor  
-- 📝 **Policy Brief Generator** – Auto-generate local policy briefs  
-
----
-
-## 📈 Machine Learning Pipeline
-
-- Data cleaning & preprocessing (missing values, encoding)
-- Feature engineering (nutritional, socioeconomic, WASH indicators)
-- Class balancing (SMOTE, class weights)
-- Model training:
-  - Logistic Regression
-  - XGBoost
-  - LightGBM
-- Evaluation metrics: Accuracy, Precision, Recall, F1, ROC AUC, Log Loss
-- Model serialization via `joblib`  
+- 🗺️ **Geospatial Choropleths** – District-level stunting & wasting rates  
+- 📊 **Feature Importance Viewers** – Compare risk factors across models  
+- 🧮 **Stunting Risk Simulator** – Predict household risk interactively  
+- 📝 **Policy Brief Generator** – Auto-generate PDF recommendations  
+- 📦 **Data Download** – Export processed summaries  
 
 ---
 
-## 🛠 Tech Stack
+## 🧠 Machine Learning Pipeline
 
-- **Frontend:** Streamlit  
-- **Visualization:** Plotly, Seaborn, Matplotlib, Folium  
-- **ML & Data:** Pandas, NumPy, Scikit-learn, XGBoost, LightGBM, Imbalanced-learn  
-- **Utilities:** Joblib, Statsmodels, Collections, OS, Regex  
-
----
-<pre> ## 📂 Repository Structure
-
-├── app/
-│ ├── dashboard.py # Streamlit frontend
-│ ├── simulator.py # Risk prediction interface
-│ ├── visualizations.py # Mapping and plotting functions
-│ └── utils.py # Helper functions
-├── models/
-│ ├── stunting_model.pkl # Trained ML model
-│ └── feature_pipeline.pkl # Feature engineering pipeline
-├── data/
-│ ├── raw/ # Raw CFSVA data
-│ └── processed/ # Cleaned datasets
-├── reports/
-│ └── policy_brief.pdf # Intervention recommendations
-├── README.md
-└── requirements.txt
-  </pre>
+- 🔍 Data preprocessing: missing values, encoding, normalization  
+- 🧪 Feature engineering: nutrition, health, WASH, socioeconomics  
+- ⚖️ Class balancing: SMOTE & `class_weight`  
+- 🧠 Models used:
+  - Logistic Regression  
+  - XGBoost  
+  - LightGBM  
+  - CatBoost (for comparison)  
+- 🧮 Evaluation metrics: Accuracy, F1, ROC AUC, Precision, Recall  
+- 💾 Model serialization: `joblib`  
 
 ---
 
-## 📢 Hackathon Fit & Innovation
+## 🗂️ Directory Structure
 
-✔ Aligned with **Track 2: Ending Hidden Hunger**  
-✔ Uses **national survey data (CFSVA)**  
-✔ Delivers **predictive insights & interventions**  
-✔ Builds a **user-friendly decision support tool**  
-✔ Bridges **data science with public policy**
+```bash
+├── app.py                         # Main Streamlit entry point
+├── Models/                        # Serialized ML models
+│   ├── stunting_model.pkl
+│   └── feature_pipeline.pkl
+├── Data/                          # Raw and processed data
+│   ├── district_geospatial_summary.csv
+│   ├── rwanda_districts.geojson
+│   ├── Microdata.zip
+│   ├── ... (other feature importance CSVs)
+├── demo/
+│   └── demo.webm                  # Screen recording of app demo
+├── 🇷🇼 Tackling Hidden Hunger.docx
+├── To whom Uwera Liliane final.pdf
+├── LICENSE
+└── README.md
+
+
+🛠 Dependencies
+📦 Required Libraries
+
+Install dependencies using:
+
+pip install -r requirements.txt
+
+
+Or install manually:
+
+pip install streamlit pandas numpy scikit-learn xgboost lightgbm catboost matplotlib seaborn plotly folium imbalanced-learn statsmodels joblib geopandas
+
+📄 Sample requirements.txt
+streamlit==1.32.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==3.0.5
+lightgbm==4.6.0
+catboost==1.2.8
+matplotlib==3.10.3
+seaborn==0.13.2
+plotly==5.22.0
+folium==0.20.0
+imbalanced-learn==0.12.3
+joblib==1.4.2
+statsmodels==0.14.2
+geopandas==1.1.0
+
+streamlit run app.py
+Option 2: GitHub + Streamlit Cloud
+
+Push your project to GitHub
+
+Deploy via https://share.streamlit.io
+
+Set app.py as the main entry point
+
+🔒 License
+
+This project is licensed under the terms of the MIT License. See LICENSE
+ file for details.
+
+📢 Hackathon Fit & Innovation
+
+✅ Directly addresses Track 2: Ending Hidden Hunger
+✅ Leverages national data (CFSVA 2024)
+✅ Blends machine learning + geospatial + public health
+✅ Offers actionable policy suggestions
+✅ Provides an interactive & scalable tool
+
+🔮 Future Roadmap
+
+📲 Real-time data integration (mobile surveys, HMIS)
+
+🧑‍🌾 Agriculture-nutrition modeling (e.g., kitchen gardens)
+
+🌐 Full cloud deployment for ministries & NGOs
+
+🤝 Government + NGO pilot collaboration
+
+🙌 Acknowledgments
+
+National Institute of Statistics of Rwanda (NISR)
+
+Organizers of the NISR Big Data Hackathon 2025
+
+CFSVA survey teams and all data contributors
+
+GitHub Repository: github.com/uweraliliane/RwandaHiddenHungerRwanda
+
 
 ---
 
-## 🔮 Future Work
+### ⚠️ 2. Code snippets like `pip install` or `requirements.txt` should be in code blocks too
 
-- Integrate **real-time data** from mobile surveys or health systems  
-- Expand simulator to include **nutrition-sensitive agriculture inputs**  
-- Deploy dashboard as a **web app for policymakers**  
-- Collaborate with **local NGOs and government** for piloting  
+Right now, it's hard to read because it's plain text. Wrap installation commands and `requirements.txt` content like this:
 
----
+✅ **Fix:**
 
-## 🙌 Acknowledgments
+```markdown
+### 🛠️ Dependencies
 
-Special thanks to:
-- National Institute of Statistics of Rwanda (NISR)  
-- Organizers of the Big Data Hackathon 2025  
-- CFSVA data collection team  
+#### 📦 Required Libraries
 
+Install using:
 
+```bash
+pip install -r requirements.txt
