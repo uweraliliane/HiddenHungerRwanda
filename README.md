@@ -10,7 +10,7 @@
 
 Despite commendable progress in food security, over **33% of Rwandan children under five** still suffer from **stunting** due to chronic undernutrition and hidden hunger (micronutrient deficiencies).
 
-This project uses **machine learning and geospatial analysis** to identify at-risk populations and inform targeted interventions. A user-friendly dashboard empowers policymakers, NGOs, and public health professionals to make data-driven decisions.
+This project uses **machine learning and geospatial analysis** to identify at‑risk populations and inform targeted interventions. A user-friendly dashboard empowers policymakers, NGOs, and public health professionals to make data-driven decisions.
 
 ---
 
@@ -19,7 +19,7 @@ This project uses **machine learning and geospatial analysis** to identify at-ri
 This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with the following key goals:
 
 - 🗺️ **Map** stunting, wasting, and underweight across Rwanda  
-- 🤖 **Model** household-level malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression)  
+- 🤖 **Model** household-level malnutrition risk using ML (XGBoost, LightGBM, Logistic Regression, CatBoost)  
 - 📉 **Identify** top predictive risk factors  
 - 🧮 **Simulate** household stunting probabilities  
 - 🛠️ **Recommend** actionable policy & program interventions  
@@ -30,12 +30,10 @@ This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with
 ## 📊 Data Sources
 
 - 🗃️ **CFSVA 2024 – Comprehensive Food Security and Vulnerability Analysis**  
-  🔗 [CFSVA 2024](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)
-
+  🔗 [CFSVA 2024](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
 - 🌍 **Rwanda Geospatial Boundaries**  
-  🔗 [SimpleMaps Rwanda GIS](https://simplemaps.com/gis/country/rw)
-
-- ➕ **Supplemental data**: DHS, WASH, health indicators
+  🔗 [SimpleMaps Rwanda GIS](https://simplemaps.com/gis/country/rw)  
+- ➕ Supplemental data: DHS, WASH, health indicators  
 
 ---
 
@@ -51,9 +49,9 @@ This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with
 
 ### 💡 Top Predictive Risk Factors
 
-- Low MUAC (Mid-Upper Arm Circumference)  
+- Low MUAC (Mid‑Upper Arm Circumference)  
 - Lack of Vitamin A intake  
-- Poor wealth index  
+- Low wealth index  
 - Low dietary diversity (women)  
 - Unsafe water source  
 - Illness history (diarrhea, fever)  
@@ -62,14 +60,14 @@ This project was developed for **Hackathon Track 2: Ending Hidden Hunger**, with
 
 ## 🧩 Root Cause Analysis & Interventions
 
-| **Feature**            | **Root Cause**            | **Suggested Intervention**                         |
-|------------------------|---------------------------|----------------------------------------------------|
-| Low MUAC               | Undernutrition            | Growth monitoring, feeding support                 |
-| No Vitamin A Intake    | Micronutrient deficiency  | Supplementation campaigns                          |
-| Low Wealth Index       | Poverty                   | Cash transfers, income-generation programs         |
-| Unsafe Water Source    | WASH infrastructure gaps  | Water access projects, hygiene promotion           |
-| Rare Handwashing       | Hygiene knowledge gap     | Community education, WASH campaigns                |
-| Low Dietary Diversity  | Food insecurity           | Kitchen gardens, school feeding, home farming      |
+| **Feature**               | **Root Cause**            | **Suggested Intervention**                         |
+|---------------------------|---------------------------|----------------------------------------------------|
+| Low MUAC                  | Undernutrition            | Growth monitoring, feeding support                 |
+| No Vitamin A Intake       | Micronutrient deficiency  | Supplementation campaigns                          |
+| Low Wealth Index          | Poverty                   | Cash transfers, income‑generation programs         |
+| Unsafe Water Source       | WASH infrastructure gaps  | Water access projects, hygiene promotion           |
+| Rare Handwashing          | Hygiene knowledge gap     | Community education, WASH campaigns                |
+| Low Dietary Diversity     | Food insecurity           | Kitchen gardens, school feeding, home farming      |
 
 ---
 
@@ -94,7 +92,7 @@ An interactive **Streamlit dashboard** includes:
   - Logistic Regression  
   - XGBoost  
   - LightGBM  
-  - CatBoost (for comparison)  
+  - CatBoost  
 - 🧮 Evaluation metrics: Accuracy, F1, ROC AUC, Precision, Recall  
 - 💾 Model serialization: `joblib`  
 
@@ -111,10 +109,110 @@ An interactive **Streamlit dashboard** includes:
 │   ├── district_geospatial_summary.csv
 │   ├── rwanda_districts.geojson
 │   ├── Microdata.zip
-│   ├── ... (other feature importance CSVs)
+│   ├── gadm41_RWA_shp.zip
+│   ├── feature_importance CSVs & model comparison results
+│   └── ...
 ├── demo/
 │   └── demo.webm                  # Screen recording of app demo
 ├── 🇷🇼 Tackling Hidden Hunger.docx
 ├── To whom Uwera Liliane final.pdf
 ├── LICENSE
 └── README.md
+
+---
+markdown
+## 🛠️ Dependencies
+
+### 📦 Install Required Libraries
+
+Install all dependencies using:
+
+```bash
+pip install -r requirements.txt
+
+pip install streamlit pandas numpy scikit-learn xgboost lightgbm catboost matplotlib seaborn plotly folium imbalanced-learn statsmodels joblib geopandas
+
+markdown
+📄 Sample requirements.txt
+txt
+streamlit==1.32.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==3.0.5
+lightgbm==4.6.0
+catboost==1.2.8
+matplotlib==3.10.3
+seaborn==0.13.2
+plotly==5.22.0
+folium==0.20.0
+imbalanced-learn==0.12.3
+joblib==1.4.2
+statsmodels==0.14.2
+geopandas==1.1.0
+
+markdown
+🚀 How to Run the App
+▶️ Option 1: Local Machine
+
+bash
+streamlit run app.py
+
+markdown
+☁️ Option 2: GitHub + Streamlit Cloud
+
+Push your project to GitHub
+
+Deploy via Streamlit Cloud
+
+Set app.py as the main entry point
+
+🔒 License
+
+This project is licensed under the MIT License.
+See the LICENSE
+ file for details.
+
+📢 Hackathon Fit & Innovation
+
+✅ Directly addresses Track 2: Ending Hidden Hunger
+✅ Leverages national data (CFSVA 2024)
+✅ Blends machine learning + geospatial + public health
+✅ Offers actionable policy suggestions
+✅ Provides an interactive & scalable tool
+
+🔮 Future Roadmap
+
+📲 Real-time data integration (mobile surveys, HMIS)
+
+🧑‍🌾 Agriculture-nutrition modeling (e.g., kitchen gardens)
+
+🌐 Full cloud deployment for ministries & NGOs
+
+🤝 Government + NGO pilot collaboration
+
+🙌 Acknowledgments
+
+National Institute of Statistics of Rwanda (NISR)
+
+Organizers of the NISR Big Data Hackathon 2025
+
+CFSVA survey teams and all data contributors
+
+🔗 GitHub Repository
+
+https://github.com/uweraliliane/RwandaHiddenHungerRwanda
+
+yaml
+
+---
+
+### ✅ Final Step:
+
+After pasting that into your `README.md`:
+
+```bash
+git add README.md
+git commit -m "Finalized README with full markdown structure"
+git push
+
