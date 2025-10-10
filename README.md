@@ -182,6 +182,7 @@ Generate this list with:
 ```bash
 pip freeze > requirements.txt
 ```
+```markdown
 📢 Hackathon Relevance & Innovation
 
 ✅ Built for Hackathon Track 2: Ending Hidden Hunger
