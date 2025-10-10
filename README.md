@@ -182,46 +182,6 @@ Generate this list with:
 ```bash
 pip freeze > requirements.txt
 ```
-```markdown
-📢 Hackathon Relevance & Innovation
-
-✅ Built for Hackathon Track 2: Ending Hidden Hunger
-✅ Uses official CFSVA national survey data
-✅ Applies machine learning for public health
-✅ Interactive dashboard to aid decision-making
-✅ Produces localized intervention recommendations
-
-🔮 Future Work
-
-Incorporate real-time health reporting (e.g., mobile surveys)
-
-Integrate nutrition-sensitive agriculture components
-
-Pilot web-based deployment for government agencies
-
-Partner with NGOs for community-level rollouts
-
-🙌 Acknowledgments
-
-National Institute of Statistics of Rwanda (NISR)
-
-Organizers of the Big Data Hackathon 2025
-
-CFSVA 2024 data collection teams
-
-SimpleMaps & GADM for GIS data
-
-🔗 Useful Links
-
-📊 CFSVA 2024 Dataset
-
-🌍 Rwanda GeoJSON Data – SimpleMaps
-
-🧠 GitHub Repository
-
-📽️ Demo Video (see demo/demo.webm)
-```
-
 📢 **Hackathon Relevance & Innovation**
 
 - ✅ Built for Hackathon Track 2: Ending Hidden Hunger  
