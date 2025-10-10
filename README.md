@@ -68,8 +68,8 @@ An interactive Streamlit dashboard includes:
 - 🧮 Evaluation metrics: Accuracy, F1, ROC AUC, Precision, Recall  
 - 💾 Model serialization: joblib  
 
-<pre>## 🗂️ Directory Structure  
-
+## 🗂️ Directory Structure  
+bash
 ├── app.py # Main Streamlit entry point
 ├── Models/ # Serialized ML models
 │ ├── stunting_model.pkl
@@ -87,7 +87,7 @@ An interactive Streamlit dashboard includes:
 ├── To whom Uwera Liliane final.pdf
 ├── LICENSE
 └── README.md
-</pre>
+
 ## 🛠️ Dependencies
 
 ### 📦 Install Required Libraries
