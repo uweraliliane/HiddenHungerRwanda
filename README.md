@@ -42,7 +42,8 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 
 ---
 
-## 📈 Key Findings
+## 📈 Key Findings – Hotspots & Risk Factors
+
 
 ### 🔺 Top 5 High-Stunting Districts
 
@@ -123,27 +124,24 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 ---
 
 ## 📂 Directory Structure
- <pre> RwandaHiddenHungerRwanda/
-│
-├── app.py # Streamlit entrypoint
-├── 🇷🇼 Tackling Hidden Hunger.docx # Final write-up
-├── To whom Uwera Liliane final.pdf 
+```text
+RwandaHiddenHungerRwanda/
+├── app.py
+├── 🇷🇼 Tackling Hidden Hunger.docx
+├── To whom Uwera Liliane final.pdf
 ├── LICENSE
-├── README.md 
-│
+├── README.md
 ├── Data/
-│ ├── Microdata.zip
-│ ├── gadm41_RWA_shp.zip
-│ ├── rwanda_districts.geojson
-│ ├── feature_importance CSVs
-│ └── model_comparison_results.csv
-│
+│   ├── Microdata.zip
+│   ├── gadm41_RWA_shp.zip
+│   ├── rwanda_districts.geojson
+│   ├── feature_importance CSVs
+│   └── model_comparison_results.csv
 ├── Models/
-│ └── Trained ML models (.pkl)
-│
+│   └── Trained ML models (.pkl)
 ├── demo/
-│ └── demo.webm # Video demo
-</pre>
+│   └── demo.webm
+```
 
 ---
 
