@@ -66,13 +66,13 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 ## 🧩 Root Cause Analysis & Interventions
 
 | **Factor**            | **Root Cause**            | **Recommended Intervention**                          |
-|-----------------------|---------------------------|-------------------------------------------------------|
-| Low MUAC              | Chronic undernutrition     | Community feeding & monitoring programs               |
-| No Vitamin A Intake   | Micronutrient deficiency   | Supplementation campaigns, food fortification         |
+|-----------------------|---------------------------|------------------------------------------------------|
+| Low MUAC              | Chronic undernutrition     | Community feeding & monitoring programs              |
+| No Vitamin A Intake   | Micronutrient deficiency   | Supplementation campaigns, food fortification        |
 | Low Wealth Index      | Poverty                   | Cash transfers, job training, income-generation activities |
-| Unsafe Water Source   | WASH infrastructure gaps  | Safe water access projects, hygiene education         |
-| Low Handwashing Rates | Knowledge / behavior gaps | WASH campaigns, school-based hygiene education        |
-| Low Dietary Diversity | Food insecurity           | Kitchen gardens, school feeding programs              |
+| Unsafe Water Source   | WASH infrastructure gaps  | Safe water access projects, hygiene education        |
+| Low Handwashing Rates | Knowledge / behavior gaps | WASH campaigns, school-based hygiene education       |
+| Low Dietary Diversity | Food insecurity           | Kitchen gardens, school feeding programs             |
 
 ---
 
@@ -124,103 +124,3 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 
 ## 📂 Directory Structure
 
-RwandaHiddenHungerRwanda/
-│
-├── app.py # Streamlit entrypoint
-├── 🇷🇼 Tackling Hidden Hunger.docx # Final write-up
-├── To whom Uwera Liliane final.pdf # Presentation or policy brief
-├── LICENSE
-├── README.md # You're here!
-│
-├── Data/
-│ ├── Microdata.zip
-│ ├── gadm41_RWA_shp.zip
-│ ├── rwanda_districts.geojson
-│ ├── feature_importance CSVs
-│ └── model_comparison_results.csv
-│
-├── Models/
-│ └── Trained ML models (.pkl)
-│
-├── demo/
-│ └── demo.webm # Video demo
-
----
-
----
-
-## ▶️ Running the App
-
-Ensure **Python 3.9+** is installed and required packages are available.
-
-### Step 1: Install dependencies
-
-```bash
-pip install -r requirements.txt
-
----
-Step 2: Launch the Streamlit app
-streamlit run app.py
-
-### 📦 Dependencies (requirements.txt)
-
-streamlit==1.32.0
-pandas==2.2.2
-numpy==1.26.4
-scikit-learn==1.4.2
-xgboost==3.0.5
-lightgbm==4.6.0
-catboost==1.2.8
-matplotlib==3.10.3
-seaborn==0.13.2
-plotly==5.22.0
-folium==0.20.0
-imbalanced-learn==0.12.3
-joblib==1.4.2
-statsmodels==0.14.2
-geopandas==1.1.0
----
-Generate this list with:
-pip freeze > requirements.txt
-
-📢 Hackathon Relevance & Innovation
-
-✅ Built for Hackathon Track 2: Ending Hidden Hunger
-
-✅ Uses official CFSVA national survey data
-
-✅ Applies machine learning for public health
-
-✅ Interactive dashboard to aid decision-making
-
-✅ Produces localized intervention recommendations
-
-🔮 Future Work
-
-Incorporate real-time health reporting (e.g., mobile surveys)
-
-Integrate nutrition-sensitive agriculture components
-
-Pilot web-based deployment for government agencies
-
-Partner with NGOs for community-level rollouts
-
-🙌 Acknowledgments
-
-National Institute of Statistics of Rwanda (NISR)
-
-Organizers of the Big Data Hackathon 2025
-
-CFSVA 2024 data collection teams
-
-SimpleMaps & GADM for GIS data
-
-🔗 Useful Links
-
-📊 CFSVA 2024 Dataset
-
-🌍 Rwanda GeoJSON Data – SimpleMaps
-
-🧠 GitHub Repository
-
-📽️ Demo Video (see demo/demo.webm)
