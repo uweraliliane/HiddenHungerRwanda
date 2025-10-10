@@ -29,8 +29,7 @@ Special thanks to:
 - ---
 
 ## 📂 Repository Structure
-///
-  
+///  
 ├── app/
 │ ├── dashboard.py # Streamlit frontend
 │ ├── simulator.py # Risk prediction interface
@@ -46,7 +45,7 @@ Special thanks to:
 │ └── policy_brief.pdf # Intervention recommendations
 ├── README.md
 └── requirements.txt
-
+///
 
 ---
 
