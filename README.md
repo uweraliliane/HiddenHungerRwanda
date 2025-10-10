@@ -155,7 +155,7 @@ Ensure **Python 3.9+** is installed and required packages are available.
 
 ```bash
 pip install -r requirements.txt
-
+---
 Step 2: Launch the Streamlit app
 ```bash
 streamlit run app.py
