@@ -122,14 +122,14 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 
 ---
 
-<pre>## 📂 Directory Structure
-  RwandaHiddenHungerRwanda/
+## 📂 Directory Structure
+ <pre> RwandaHiddenHungerRwanda/
 │
 ├── app.py # Streamlit entrypoint
 ├── 🇷🇼 Tackling Hidden Hunger.docx # Final write-up
-├── To whom Uwera Liliane final.pdf # Presentation or policy brief
+├── To whom Uwera Liliane final.pdf 
 ├── LICENSE
-├── README.md # You're here!
+├── README.md 
 │
 ├── Data/
 │ ├── Microdata.zip
@@ -144,5 +144,16 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 ├── demo/
 │ └── demo.webm # Video demo
 </pre>
+
+---
+
+## ▶️ Running the App
+
+Ensure **Python 3.9+** is installed and required packages are available.
+
+### Step 1: Install dependencies
+
+```bash
+pip install -r requirements.txt
 
 
