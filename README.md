@@ -119,9 +119,8 @@ This project directly addresses **Track 2: Ending Hidden Hunger**, aiming to:
 
 ---
 
-## 📂 Directory Structure
+<pre>## 📂 Directory Structure
 
-```plaintext
 RwandaHiddenHungerRwanda/
 │
 ├── app.py                       # Streamlit entrypoint
@@ -142,6 +141,7 @@ RwandaHiddenHungerRwanda/
 │
 ├── demo/
 │   └── demo.webm                # Video demo
+</pre>
 
 ▶️ Running the App
 
@@ -154,6 +154,8 @@ pip install -r requirements.txt
 streamlit run app.py
 
 📦 Dependencies (requirements.txt)
+
+---
 streamlit==1.32.0
 pandas==2.2.2
 numpy==1.26.4
@@ -169,6 +171,51 @@ imbalanced-learn==0.12.3
 joblib==1.4.2
 statsmodels==0.14.2
 geopandas==1.1.0
+
+To generate this full list from your system:
+pip freeze > requirements.txt
+
+📢 Hackathon Relevance & Innovation
+
+✅ Built for Hackathon Track 2: Ending Hidden Hunger
+
+✅ Uses official CFSVA national survey data
+
+✅ Applies machine learning for public health
+
+✅ Interactive dashboard to aid decision-making
+
+✅ Produces localized intervention recommendations
+
+🔮 Future Work
+
+Incorporate real-time health reporting (e.g., mobile surveys)
+
+Integrate nutrition-sensitive agriculture components
+
+Pilot web-based deployment for government agencies
+
+Partner with NGOs for community-level rollouts
+
+🙌 Acknowledgments
+
+National Institute of Statistics of Rwanda (NISR)
+
+Organizers of the Big Data Hackathon 2025
+
+CFSVA 2024 data collection teams
+
+SimpleMaps & GADM for GIS data
+
+🔗 Useful Links
+
+📊 CFSVA 2024 Dataset
+
+🌍 Rwanda GeoJSON Data – SimpleMaps
+
+🧠 GitHub Repository
+
+📽️ Demo Video (see demo/demo.webm)
 
 
 To generate this full list from your system:
