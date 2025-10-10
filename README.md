@@ -155,8 +155,29 @@ Ensure **Python 3.9+** is installed and required packages are available.
 
 ```bash
 pip install -r requirements.txt
----
-Step 2: Launch the Streamlit app
+```
+### Step 2: Launch the Streamlit app
 ```bash
 streamlit run app.py
+```
+📦 Dependencies (requirements.txt)
+```txt
+streamlit==1.32.0
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.4.2
+xgboost==3.0.5
+lightgbm==4.6.0
+catboost==1.2.8
+matplotlib==3.10.3
+seaborn==0.13.2
+plotly==5.22.0
+folium==0.20.0
+imbalanced-learn==0.12.3
+joblib==1.4.2
+statsmodels==0.14.2
+geopandas==1.1.0
+```
+
+
 
