@@ -10,11 +10,11 @@
 
 Despite notable progress, over **33% of Rwandan children under five** remain stunted, primarily due to **micronutrient deficiencies** and **chronic undernutrition**. This project leverages **CFSVA 2024 data** and advanced machine learning to:
 
-- Identify geographic **malnutrition hotspots**
-- Model **key risk factors**
-- Simulate **household-level stunting risks**
-- Recommend **targeted interventions**
-- Provide an interactive **Streamlit dashboard** for decision-makers
+- Identify geographic **malnutrition hotspots**  
+- Model **key risk factors**  
+- Simulate **household-level stunting risks**  
+- Recommend **targeted interventions**  
+- Provide an interactive **Streamlit dashboard** for decision-makers  
 
 ---
 
@@ -37,7 +37,7 @@ This project directly addresses **Track 2: Ending Hidden Hunger**, aiming to:
 - **Geospatial Data:**  
   - [GADM Rwanda Shapefiles](https://gadm.org/)  
   - [SimpleMaps Rwanda GeoJSON](https://simplemaps.com/gis/country/rw)  
-- **Other:** DHS, WASH indicators (if applicable)
+- **Other:** DHS, WASH indicators (if applicable)  
 
 ---
 
@@ -79,7 +79,7 @@ This project directly addresses **Track 2: Ending Hidden Hunger**, aiming to:
 - 📊 **Risk Factor Importance** – ML-based ranking of features  
 - 🧮 **Household Risk Simulator** – Predict stunting from custom inputs  
 - 🧠 **Root Cause & Intervention Map** – Policy suggestions by driver  
-- 📝 **Policy Brief Generator** – Auto-creates local policy recommendations (PDF)
+- 📝 **Policy Brief Generator** – Auto-creates local policy recommendations (PDF)  
 
 ---
 
@@ -101,56 +101,52 @@ This project directly addresses **Track 2: Ending Hidden Hunger**, aiming to:
 ## 🧠 Machine Learning Pipeline
 
 1. **Preprocessing:**
-   - Handle missing data
-   - One-hot encoding, scaling, class balancing (SMOTE, class weights)
+   - Handle missing data  
+   - One-hot encoding, scaling, class balancing (SMOTE, class weights)  
 2. **Feature Engineering:**
-   - Nutritional indicators (e.g., MUAC)
-   - Socioeconomic variables (wealth, income)
-   - WASH & health features (water source, recent illness)
+   - Nutritional indicators (e.g., MUAC)  
+   - Socioeconomic variables (wealth, income)  
+   - WASH & health features (water source, recent illness)  
 3. **Models Used:**
    - Logistic Regression  
    - XGBoost  
    - LightGBM  
    - CatBoost  
 4. **Evaluation Metrics:**
-   - Accuracy, Precision, Recall, F1, ROC-AUC, Log Loss
+   - Accuracy, Precision, Recall, F1, ROC-AUC, Log Loss  
 5. **Serialization:**
-   - `joblib` used for model saving/loading
+   - `joblib` used for model saving/loading  
 
 ---
 
 ## 📂 Directory Structure
 
-<Pre>📁 RwandaHiddenHungerRwanda/
+```plaintext
+RwandaHiddenHungerRwanda/
 │
-├── app.py # Streamlit entrypoint
-├── 🇷🇼 Tackling Hidden Hunger.docx # Final write-up
-├── To whom Uwera Liliane final.pdf # Presentation or policy brief
+├── app.py                       # Streamlit entrypoint
+├── 🇷🇼 Tackling Hidden Hunger.docx  # Final write-up
+├── To whom Uwera Liliane final.pdf   # Presentation or policy brief
 ├── LICENSE
-├── README.md # You're here!
+├── README.md                    # You're here!
 │
 ├── Data/
-│ ├── Microdata.zip
-│ ├── gadm41_RWA_shp.zip
-│ ├── rwanda_districts.geojson
-│ ├── feature_importance CSVs
-│ └── model_comparison_results.csv
+│   ├── Microdata.zip
+│   ├── gadm41_RWA_shp.zip
+│   ├── rwanda_districts.geojson
+│   ├── feature_importance CSVs
+│   └── model_comparison_results.csv
 │
 ├── Models/
-│ └── Trained ML models (.pkl)
+│   └── Trained ML models (.pkl)
 │
 ├── demo/
-│ └── demo.webm # Video demo
-</pre>
+│   └── demo.webm                # Video demo
 
-
----
-
-## ▶️ Running the App
+▶️ Running the App
 
 Ensure Python 3.9+ is installed and required packages are available (see below).
 
-```bash
 # Step 1: Install dependencies
 pip install -r requirements.txt
 
@@ -158,8 +154,6 @@ pip install -r requirements.txt
 streamlit run app.py
 
 📦 Dependencies (requirements.txt)
-
-
 streamlit==1.32.0
 pandas==2.2.2
 numpy==1.26.4
@@ -177,45 +171,4 @@ statsmodels==0.14.2
 geopandas==1.1.0
 
 
-
 To generate this full list from your system:
-
-pip freeze > requirements.txt
-
-📢 Hackathon Relevance & Innovation
-
-✅ Built for Hackathon Track 2: Ending Hidden Hunger
-✅ Uses official CFSVA national survey data
-✅ Applies machine learning for public health
-✅ Interactive dashboard to aid decision-making
-✅ Produces localized intervention recommendations
-
-🔮 Future Work
-
-Incorporate real-time health reporting (e.g. mobile surveys)
-
-Integrate nutrition-sensitive agriculture components
-
-Pilot web-based deployment for government agencies
-
-Partner with NGOs for community-level rollouts
-
-🙌 Acknowledgments
-
-National Institute of Statistics of Rwanda (NISR)
-
-Organizers of the Big Data Hackathon 2025
-
-CFSVA 2024 data collection teams
-
-SimpleMaps & GADM for GIS data
-
-🔗 Useful Links
-
-📊 CFSVA 2024 Dataset
-
-🌍 Rwanda GeoJSON Data – SimpleMaps
-
-🧠 GitHub Repository
-
-📽️ Demo Video
