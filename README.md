@@ -122,5 +122,27 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 
 ---
 
-## 📂 Directory Structure
+<pre>## 📂 Directory Structure
+  RwandaHiddenHungerRwanda/
+│
+├── app.py # Streamlit entrypoint
+├── 🇷🇼 Tackling Hidden Hunger.docx # Final write-up
+├── To whom Uwera Liliane final.pdf # Presentation or policy brief
+├── LICENSE
+├── README.md # You're here!
+│
+├── Data/
+│ ├── Microdata.zip
+│ ├── gadm41_RWA_shp.zip
+│ ├── rwanda_districts.geojson
+│ ├── feature_importance CSVs
+│ └── model_comparison_results.csv
+│
+├── Models/
+│ └── Trained ML models (.pkl)
+│
+├── demo/
+│ └── demo.webm # Video demo
+</pre>
+
 
