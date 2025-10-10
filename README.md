@@ -119,22 +119,19 @@ An interactive **Streamlit dashboard** includes:
 ├── LICENSE
 └── README.md
 
----
-markdown
-## 🛠️ Dependencies
-
-### 📦 Install Required Libraries
+🛠️ Dependencies
+📦 Install Required Libraries
 
 Install all dependencies using:
 
-```bash
 pip install -r requirements.txt
+
+
+Or install manually:
 
 pip install streamlit pandas numpy scikit-learn xgboost lightgbm catboost matplotlib seaborn plotly folium imbalanced-learn statsmodels joblib geopandas
 
-markdown
 📄 Sample requirements.txt
-txt
 streamlit==1.32.0
 pandas==2.2.2
 numpy==1.26.4
@@ -151,14 +148,10 @@ joblib==1.4.2
 statsmodels==0.14.2
 geopandas==1.1.0
 
-markdown
 🚀 How to Run the App
 ▶️ Option 1: Local Machine
-
-bash
 streamlit run app.py
 
-markdown
 ☁️ Option 2: GitHub + Streamlit Cloud
 
 Push your project to GitHub
@@ -203,16 +196,21 @@ CFSVA survey teams and all data contributors
 
 https://github.com/uweraliliane/RwandaHiddenHungerRwanda
 
-yaml
 
 ---
 
-### ✅ Final Step:
+### Instructions:
 
-After pasting that into your `README.md`:
+- **Copy all the above text** exactly as is.
+- **Paste it directly into your README.md file** in the GitHub editor.
+- Commit and push.
 
-```bash
-git add README.md
-git commit -m "Finalized README with full markdown structure"
-git push
+GitHub will render all headers, emojis, tables, and code blocks nicely.
 
+---
+
+If you want, I can help you step-by-step to commit from the GitHub web UI or fix any further formatting issues!
+
+---
+
+Would you like me to give you a **step-by-step GitHub web editor & commit tutorial** next?
