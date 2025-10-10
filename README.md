@@ -88,7 +88,6 @@ An interactive Streamlit dashboard includes:
 ├── LICENSE
 └── README.md
 </pre>
-r
 ## 🛠️ Dependencies
 
 ### 📦 Install Required Libraries
