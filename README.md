@@ -127,7 +127,7 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 ```text
 RwandaHiddenHungerRwanda/
 ├── app.py
-├── 🇷🇼 Tackling Hidden Hunger.docx
+├── Tackling_Hidden_Hunger.docx
 ├── To whom Uwera Liliane final.pdf
 ├── LICENSE
 ├── README.md
@@ -212,6 +212,11 @@ pip freeze > requirements.txt
 
 - 📊 [CFSVA 2024 Dataset](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
 - 🌍 [Rwanda GeoJSON Data – SimpleMaps](https://simplemaps.com/gis/country/rw)  
-- 🧠 [GitHub Repository](#)  
+- 🧠 (https://github.com/uweraliliane/RwandaHiddenHungerRwanda)
 - 📽️ Demo Video (see `demo/demo.webm`)  
 
+---
+
+## 🧾 Declaration of Originality
+
+I declare that this submission is my own original work, and all data sources, libraries, and references are fully acknowledged. Any assistance received has been appropriately disclosed.
