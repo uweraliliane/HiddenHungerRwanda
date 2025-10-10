@@ -39,8 +39,6 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
 - **Geospatial Data:**  
   - [GADM Rwanda Shapefiles](https://gadm.org/)  
   - [SimpleMaps Rwanda GeoJSON](https://simplemaps.com/gis/country/rw)  
-- **Other:** DHS, WASH indicators (if applicable)  
-
 ---
 
 ## 📈 Key Findings – Hotspots & Risk Factors
@@ -123,6 +121,7 @@ This project addresses **Track 2: Ending Hidden Hunger**, aiming to:
    - `joblib` used for model saving/loading  
 
 ---
+▶️ Demo Video
 
 ## 📂 Directory Structure
 ```text
@@ -211,10 +210,14 @@ pip freeze > requirements.txt
 
 🔗 **Useful Links**
 
+---
+
+🔗 **Useful Links**
+
 - 📊 [CFSVA 2024 Dataset](https://statistics.gov.rw/data-sources/surveys/CFSVA/comprehensive-food-security-vulnerability-analysis-cfsva-2024)  
 - 🌍 [Rwanda GeoJSON Data – SimpleMaps](https://simplemaps.com/gis/country/rw)  
-- 🧠 (https://github.com/uweraliliane/RwandaHiddenHungerRwanda)
-- 📽️ Demo Video (see `demo/demo.webm`)  
+- 🧠 [GitHub Repository](https://github.com/uweraliliane/RwandaHiddenHungerRwanda)  
+- 📽️ [Demo Video – Google Drive](https://drive.google.com/file/d/1u7Df-iwcgYH2t_qK8pennIRMtwxw5wVx/view?usp=drive_link)  
 
 ---
 
