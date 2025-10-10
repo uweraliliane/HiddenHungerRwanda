@@ -29,7 +29,7 @@ with st.sidebar:
 # -------------------------------
 # HEADER
 # -------------------------------
-st.title("🌾 Ending Hidden Hunger in Rwanda")
+st.title("🌾 Tacke Hidden Hunger in Rwanda")
 st.markdown("### 🎯 A Data Science Tool for Nutrition Policy & Action")
 st.success("""
 This dashboard visualizes **stunting risk**, **geographic disparities**, and **root causes** 
@@ -279,13 +279,13 @@ with tab4:
     - Distribute fortified porridge & micronutrients  
     - WASH interventions in critical zones  
     - Improve Vitamin A & deworming coverage  
-    - Track & support high-risk children using risk tool  
+    - Track & support high-risk children using risk prediction tool  
     """)
 
     st.success("### 📈 Medium-Term Strategies (1–3 Years)")
     st.markdown("""
     - Promote nutrition-sensitive agriculture  
-    - Integrate nutrition into cash/social protection  
+    - Integrate nutrition in welfare schemes   
     - Strengthen antenatal & early childhood services  
     - Nutrition education via ECD and school systems  
     """)
